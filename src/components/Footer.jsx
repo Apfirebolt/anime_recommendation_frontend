@@ -1,103 +1,96 @@
+// components/Footer.tsx
 'use client';
 
 import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className="bg-primary border-t border-slate-800 text-slate-300 transition-colors">
-      <div className="container mx-auto px-6 pt-12 pb-8">
+    <footer className="bg-anime-dark border-t border-anime-sage/20 text-anime-light/80 transition-colors">
+      <div className="container mx-auto px-6 pt-12 pb-8 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           
           {/* Brand & Description */}
           <div className="md:col-span-1 space-y-4">
-            <div className="flex items-center space-x-2">
-              <div className="h-7 w-7 rounded-lg bg-success flex items-center justify-center font-mono font-bold text-white text-sm">
-                &lt;/&gt;
-              </div>
-              <span className="text-xl font-bold text-white tracking-tight">
-                Next Code
+            <Link href="/" className="inline-block">
+              <span className="text-2xl font-bold font-heading text-anime-sage tracking-wider">
+                Anime<span className="text-anime-coral">.</span> Lounge
               </span>
-            </div>
-            <p className="text-sm text-slate-400 leading-relaxed">
-              A modern, browser-based code editor built for seamless development, testing, and collaboration.
+            </Link>
+            <p className="text-sm text-anime-light/60 leading-relaxed font-sans">
+              A modern multi-domain recommendation platform for anime, games, and books powered by intelligent similarity vectors.
             </p>
           </div>
 
-          {/* Product Links */}
-          <div className="space-y-3">
-            <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
-              Product
+          {/* Discovery Links */}
+          <div className="space-y-3 font-sans">
+            <h3 className="text-sm font-semibold font-heading text-anime-light uppercase tracking-wider">
+              Discover
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/editor" className="hover:text-success transition-colors">
-                  Web Editor
+                <Link href="/anime" className="hover:text-anime-sage transition-colors">
+                  Anime Catalog
                 </Link>
               </li>
               <li>
-                <Link href="/templates" className="hover:text-success transition-colors">
-                  Templates
+                <Link href="/games" className="hover:text-anime-sage transition-colors">
+                  Games
                 </Link>
               </li>
               <li>
-                <Link href="/pricing" className="hover:text-success transition-colors">
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link href="/changelog" className="hover:text-success transition-colors">
-                  Changelog
+                <Link href="/books" className="hover:text-anime-sage transition-colors">
+                  Books
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Resources Links */}
-          <div className="space-y-3">
-            <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
-              Resources
+          {/* System & API Links */}
+          <div className="space-y-3 font-sans">
+            <h3 className="text-sm font-semibold font-heading text-anime-light uppercase tracking-wider">
+              System
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/docs" className="hover:text-success transition-colors">
-                  Documentation
+                <Link href="/docs" className="hover:text-anime-sage transition-colors">
+                  API Documentation
                 </Link>
               </li>
               <li>
-                <Link href="/api" className="hover:text-success transition-colors">
-                  API Reference
+                <Link href="/algorithm" className="hover:text-anime-sage transition-colors">
+                  Similarity Engine
                 </Link>
               </li>
               <li>
-                <Link href="/community" className="hover:text-success transition-colors">
-                  Community
-                </Link>
-              </li>
-              <li>
-                <Link href="/status" className="hover:text-success transition-colors">
-                  System Status
-                </Link>
+                <a 
+                  href="https://github.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-anime-sage transition-colors"
+                >
+                  GitHub Repository
+                </a>
               </li>
             </ul>
           </div>
 
           {/* Connect / Newsletter */}
-          <div className="space-y-3">
-            <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
+          <div className="space-y-3 font-sans">
+            <h3 className="text-sm font-semibold font-heading text-anime-light uppercase tracking-wider">
               Stay Updated
             </h3>
-            <p className="text-sm text-slate-400">
-              Get the latest features and announcements delivered to your inbox.
+            <p className="text-sm text-anime-light/60">
+              Get notified when new features and datasets are indexed.
             </p>
             <form onSubmit={(e) => e.preventDefault()} className="flex gap-2">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="w-full px-3 py-2 text-sm bg-slate-900 border border-slate-700 rounded-md focus:outline-none focus:border-success text-white placeholder-slate-500"
+                className="w-full px-3 py-2 text-sm bg-anime-dark/50 border border-anime-sage/30 rounded-md focus:outline-none focus:border-anime-sage text-anime-light placeholder-anime-light/40"
               />
               <button
                 type="submit"
-                className="px-4 py-2 text-sm font-medium text-white bg-success hover:bg-emerald-600 rounded-md transition-colors"
+                className="px-4 py-2 text-sm font-medium font-semibold text-anime-dark bg-anime-sage hover:bg-anime-sage/90 rounded-md transition-colors"
               >
                 Join
               </button>
@@ -106,19 +99,16 @@ const Footer = () => {
 
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-slate-800 pt-6 mt-6 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 gap-4">
-          <p>&copy; {new Date().getFullYear()} Next Code Editor. All rights reserved.</p>
+        {/* Divider & Copyright */}
+        <div className="border-t border-anime-sage/20 pt-6 mt-6 flex flex-col md:flex-row justify-between items-center text-xs text-anime-light/50 font-sans gap-4">
+          <p>&copy; {new Date().getFullYear()} AnimeLounge Platform. All rights reserved.</p>
           
           <div className="flex space-x-6">
-            <Link href="/privacy" className="hover:text-slate-300 transition-colors">
+            <Link href="/privacy" className="hover:text-anime-light transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:text-slate-300 transition-colors">
+            <Link href="/terms" className="hover:text-anime-light transition-colors">
               Terms of Service
-            </Link>
-            <Link href="/cookies" className="hover:text-slate-300 transition-colors">
-              Cookie Preferences
             </Link>
           </div>
         </div>

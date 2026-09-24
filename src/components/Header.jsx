@@ -1,46 +1,56 @@
-'use client'
+// components/Header.tsx
+'use client';
 
 import Link from "next/link";
-import { HomeIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import { usePathname } from "next/navigation";
+import { HomeIcon, FilmIcon } from "@heroicons/react/24/outline";
 
 const Header = () => {
+  const pathname = usePathname();
 
   return (
-    <header className="bg-primary">
-      <div className="container mx-auto flex justify-between items-center p-4">
+    <header className="sticky top-0 z-50 bg-anime-dark/90 backdrop-blur-md border-b border-anime-sage/20">
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        
+        {/* Brand / Logo */}
+        <Link href="/" className="flex items-center gap-2">
+          <span className="text-2xl font-bold font-heading text-anime-sage tracking-wider">
+            Anime<span className="text-anime-coral">Lounge</span> 
+          </span>
+        </Link>
+
+        {/* Navigation Links */}
         <nav>
-          <ul className="flex space-x-4">
+          <ul className="flex items-center gap-4 font-sans">
             <li>
-              <Link href="/" className="bg-gray-200 text-gray-800 rounded-full px-3 py-1 font-semibold hover:bg-gray-300 flex items-center space-x-2">
-                <HomeIcon className="h-5 w-5" />
+              <Link 
+                href="/" 
+                className={`px-4 py-2 rounded-full font-semibold text-sm flex items-center space-x-2 transition-colors ${
+                  pathname === '/' 
+                    ? 'bg-anime-sage text-anime-dark' 
+                    : 'text-anime-light/80 hover:text-anime-sage hover:bg-anime-sage/10'
+                }`}
+              >
+                <HomeIcon className="h-4 w-4" />
                 <span>Home</span>
               </Link>
             </li>
             <li>
-              <Link href="/editor" className="bg-gray-200 text-gray-800 rounded-full px-3 py-1 font-semibold hover:bg-gray-300 flex items-center space-x-2">
-                <PencilSquareIcon className="h-5 w-5" />
-                <span>Editor</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/login" className="bg-gray-200 text-gray-800 rounded-full px-3 py-1 font-semibold hover:bg-gray-300 flex items-center space-x-2">
-                <PencilSquareIcon className="h-5 w-5" />
-                <span>Login</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/register" className="bg-gray-200 text-gray-800 rounded-full px-3 py-1 font-semibold hover:bg-gray-300 flex items-center space-x-2">
-                <PencilSquareIcon className="h-5 w-5" />
-                <span>Register</span>
+              <Link 
+                href="/anime" 
+                className={`px-4 py-2 rounded-full font-semibold text-sm flex items-center space-x-2 transition-colors ${
+                  pathname.startsWith('/anime') 
+                    ? 'bg-anime-sage text-anime-dark' 
+                    : 'text-anime-light/80 hover:text-anime-sage hover:bg-anime-sage/10'
+                }`}
+              >
+                <FilmIcon className="h-4 w-4" />
+                <span>Anime Catalog</span>
               </Link>
             </li>
           </ul>
         </nav>
-        <div>
-          <h2 className="text-2xl font-bold text-white">
-            NEXT CODE EDITOR
-          </h2>
-        </div>
+        
       </div>
     </header>
   );

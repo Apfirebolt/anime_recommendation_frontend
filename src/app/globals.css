@@ -1,16 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;600;700;800&display=swap');
 @import "tailwindcss";
 
-@theme {
-  /* Colors */
-  --color-sand: #F5F5F5;
-  --color-primary: #0E2148;
-  --color-secondary: #64748B;
-  --color-tertiary: #424242;
-  --color-success: #229799;
-  --color-warning: #F59E0B;
-  --color-danger: #EF4444;
 
-  /* Custom Background Images / Gradients */
-  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
-  --background-image-gradient-conic: conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops));
+@theme {
+  /* Custom Theme Colors */
+  --color-anime-dark: #091540;     /* Deep navy/blue */
+  --color-anime-light: #F2F2F2;    /* Off-white / light background */
+  --color-anime-coral: #D96868;    /* Accent red/coral */
+  --color-anime-olive: #91AE6E;    /* Muted green */
+  --color-anime-sage: #8BBB92;     /* Light sage green */
+
+  /* Custom Typography */
+  --font-heading: 'Outfit', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+}
+
+/* Global base styles */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-anime-dark);
+  color: var(--color-anime-light);
+}
+
+/* Helper to easily apply heading fonts */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
 }

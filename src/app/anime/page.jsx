@@ -27,7 +27,7 @@ export default function AnimeCatalogPage() {
     try {
       const response = await httpClient.get('/anime', {
         params: {
-          search: search || undefined,
+          search: search.trim() || undefined, // Trim whitespace and omit if empty
           page: pageNum,
           size: 12, // matches your backend size parameter
         },
@@ -49,7 +49,7 @@ export default function AnimeCatalogPage() {
     }
   }, []);
 
-  // Initial load and search triggers
+  // Initial load and search triggers with debounce
   useEffect(() => {
     const timer = setTimeout(() => {
       fetchAnime(searchQuery, page);
@@ -57,6 +57,12 @@ export default function AnimeCatalogPage() {
 
     return () => clearTimeout(timer);
   }, [searchQuery, page, fetchAnime]);
+
+  // Handler to reset pagination back to page 1 whenever search input changes
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+    setPage(1); 
+  };
 
   return (
     <div className="min-h-screen bg-anime-dark text-anime-light flex flex-col font-sans selection:bg-anime-sage selection:text-anime-dark">
@@ -79,10 +85,7 @@ export default function AnimeCatalogPage() {
             <input
               type="text"
               value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setPage(1); // Reset to page 1 on new search
-              }}
+              onChange={handleSearchChange}
               placeholder="Search by title, genre, studio..."
               className="w-full pl-11 pr-4 py-2.5 text-sm bg-anime-dark/50 border border-anime-sage/30 rounded-xl focus:outline-none focus:border-anime-sage text-anime-light placeholder-anime-light/40 transition-colors"
             />

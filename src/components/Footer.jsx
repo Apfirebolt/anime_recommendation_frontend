@@ -13,7 +13,7 @@ const Footer = () => {
           <div className="md:col-span-1 space-y-4">
             <Link href="/" className="inline-block">
               <span className="text-2xl font-bold font-heading text-anime-sage tracking-wider">
-                Anime<span className="text-anime-coral">.</span> Lounge
+                Anime<span className="text-anime-coral">Lounge</span>
               </span>
             </Link>
             <p className="text-sm text-anime-light/60 leading-relaxed font-sans">

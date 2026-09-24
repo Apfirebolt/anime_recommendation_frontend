@@ -5,13 +5,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import httpClient from '@/lib/api';
+import Link from 'next/link';
 import { 
   MagnifyingGlassIcon, 
-  SparklesIcon, 
   ChevronLeftIcon, 
   ChevronRightIcon, 
-  XMarkIcon,
-  FilmIcon
+  FilmIcon,
+  ArrowRightIcon
 } from '@heroicons/react/24/outline';
 
 export default function AnimeCatalogPage() {
@@ -20,11 +20,6 @@ export default function AnimeCatalogPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
-  // Modal State for "Show similar entities"
-  const [selectedAnime, setSelectedAnime] = useState(null);
-  const [similarItems, setSimilarItems] = useState([]);
-  const [modalLoading, setModalLoading] = useState(false);
 
   // Fetch anime list with search and pagination parameters
   const fetchAnime = useCallback(async (search = '', pageNum = 1) => {
@@ -62,27 +57,6 @@ export default function AnimeCatalogPage() {
 
     return () => clearTimeout(timer);
   }, [searchQuery, page, fetchAnime]);
-
-  // Fetch top 10 similar entities when modal opens
-  const handleOpenSimilarModal = async (anime) => {
-    setSelectedAnime(anime);
-    setModalLoading(true);
-    try {
-      // Calls your precomputed relational table endpoint (e.g., /anime/{id}/similar)
-      const response = await httpClient.get(`/anime/${anime.mal_id}/similar`);
-      setSimilarItems(response.data);
-    } catch (error) {
-      console.error('Failed to fetch similar entities:', error);
-      setSimilarItems([]); // Fallback empty array
-    } finally {
-      setModalLoading(false);
-    }
-  };
-
-  const handleCloseModal = () => {
-    setSelectedAnime(null);
-    setSimilarItems([]);
-  };
 
   return (
     <div className="min-h-screen bg-anime-dark text-anime-light flex flex-col font-sans selection:bg-anime-sage selection:text-anime-dark">
@@ -148,7 +122,7 @@ export default function AnimeCatalogPage() {
 
                   <div className="flex flex-wrap gap-1 pt-2">
                     {anime.genres && typeof anime.genres === 'string' && 
-                      anime.genres.split(',').slice(0, 3).map((genre, idx) => (
+                      anime.genres.split('|').slice(0, 3).map((genre, idx) => (
                         <span key={idx} className="text-[10px] px-2 py-0.5 rounded bg-anime-dark border border-anime-sage/20 text-anime-light/70">
                           {genre.trim()}
                         </span>
@@ -157,19 +131,19 @@ export default function AnimeCatalogPage() {
                   </div>
                 </div>
 
-                {/* Action Trigger */}
+                {/* Action Trigger -> Direct Link to Detail Page */}
                 <div className="pt-6 mt-4 border-t border-anime-sage/10 flex items-center justify-between">
                   <span className="text-xs text-anime-light/50 font-mono">
                     Score: {anime.score || 'N/A'}
                   </span>
                   
-                  <button
-                    onClick={() => handleOpenSimilarModal(anime)}
-                    className="px-3.5 py-2 text-xs font-semibold font-heading rounded-lg bg-anime-sage/10 text-anime-sage hover:bg-anime-sage hover:text-anime-dark transition-all flex items-center gap-1.5"
+                  <Link
+                    href={`/anime/${anime.mal_id}`}
+                    className="px-3.5 py-2 text-xs font-semibold font-heading rounded-lg bg-anime-sage/10 text-anime-sage hover:bg-anime-sage hover:text-anime-dark transition-all flex items-center gap-1.5 group/btn"
                   >
-                    <SparklesIcon className="h-4 w-4" />
-                    <span>Show Similar</span>
-                  </button>
+                    <span>View Details</span>
+                    <ArrowRightIcon className="h-3.5 w-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
+                  </Link>
                 </div>
               </div>
             ))}
@@ -199,79 +173,6 @@ export default function AnimeCatalogPage() {
           </div>
         )}
       </main>
-
-      {/* Similar Entities Modal */}
-      {selectedAnime && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-anime-dark/80 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-anime-dark border border-anime-sage/30 rounded-2xl max-w-2xl w-full p-6 space-y-6 shadow-2xl relative max-h-[85vh] flex flex-col">
-            
-            {/* Modal Header */}
-            <div className="flex items-start justify-between border-b border-anime-sage/20 pb-4">
-              <div>
-                <span className="text-xs uppercase tracking-wider text-anime-sage font-semibold">Top 10 Similar Matches</span>
-                <h2 className="text-xl font-bold font-heading text-anime-light mt-1">
-                  {selectedAnime.title_english || selectedAnime.title}
-                </h2>
-              </div>
-              <button 
-                onClick={handleCloseModal}
-                className="p-1 rounded-lg text-anime-light/60 hover:text-anime-light hover:bg-anime-sage/10 transition-colors"
-              >
-                <XMarkIcon className="h-6 w-6" />
-              </button>
-            </div>
-
-            {/* Modal Body: Similar List */}
-            <div className="overflow-y-auto space-y-3 pr-2 flex-grow">
-              {modalLoading ? (
-                <div className="flex items-center justify-center py-12">
-                  <div className="w-8 h-8 border-3 border-anime-sage/20 border-t-anime-sage rounded-full animate-spin"></div>
-                </div>
-              ) : similarItems.length === 0 ? (
-                <p className="text-center text-sm text-anime-light/50 py-8">
-                  No precomputed similar entries found for this title.
-                </p>
-              ) : (
-                similarItems.map((item, index) => (
-                  <div 
-                    key={item.mal_id || index}
-                    className="p-3.5 rounded-xl bg-anime-dark/40 border border-anime-sage/10 flex items-center justify-between gap-4"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="w-6 text-sm font-mono font-bold text-anime-sage">
-                        #{index + 1}
-                      </span>
-                      <div>
-                        <h4 className="text-sm font-semibold text-anime-light">
-                          {item.title_english || item.title}
-                        </h4>
-                        <p className="text-xs text-anime-light/50 line-clamp-1">
-                          {item.genres || 'Genres unavailable'}
-                        </p>
-                      </div>
-                    </div>
-                    {item.similarity_score && (
-                      <span className="text-xs font-mono text-anime-coral px-2.5 py-1 rounded bg-anime-coral/10">
-                        {(item.similarity_score * 100).toFixed(1)}% match
-                      </span>
-                    )}
-                  </div>
-                ))
-              )}
-            </div>
-
-            {/* Modal Footer */}
-            <div className="border-t border-anime-sage/20 pt-4 flex justify-end">
-              <button
-                onClick={handleCloseModal}
-                className="px-5 py-2 text-xs font-semibold font-heading rounded-lg bg-anime-sage text-anime-dark hover:bg-anime-sage/90 transition-colors"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       <Footer />
     </div>

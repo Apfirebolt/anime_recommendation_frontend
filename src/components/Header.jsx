@@ -45,7 +45,7 @@ const Header = () => {
                 }`}
               >
                 <FilmIcon className="h-4 w-4" />
-                <span>Anime Catalog</span>
+                <span>Anime List</span>
               </Link>
             </li>
           </ul>

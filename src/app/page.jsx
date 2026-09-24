@@ -18,7 +18,7 @@ export default function Home() {
           <div className="max-w-5xl mx-auto text-center relative z-10 space-y-8">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-anime-sage/10 border border-anime-sage/20 text-anime-sage text-sm font-medium">
               <SparklesIcon className="h-4 w-4" />
-              <span>Powered by Content-Based Similarity Vectors</span>
+              <span>Powered by Scikit-Learn</span>
             </div>
 
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold font-heading tracking-tight leading-tight">
@@ -34,16 +34,8 @@ export default function Home() {
                 href="/anime"
                 className="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold font-heading bg-anime-sage text-anime-dark hover:bg-anime-sage/90 transition-all shadow-lg shadow-anime-sage/10 flex items-center justify-center gap-2 group"
               >
-                <span>Browse Catalog</span>
+                <span>Browse Anime</span>
                 <ArrowRightIcon className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              
-              <Link
-                href="/docs"
-                className="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold font-heading bg-anime-dark/50 text-anime-light border border-anime-sage/30 hover:bg-anime-sage/10 transition-all flex items-center justify-center gap-2"
-              >
-                <CpuChipIcon className="h-4 w-4 text-anime-coral" />
-                <span>View Architecture</span>
               </Link>
             </div>
           </div>

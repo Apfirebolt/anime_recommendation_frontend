@@ -17,7 +17,7 @@ const Footer = () => {
               </span>
             </Link>
             <p className="text-sm text-anime-light/60 leading-relaxed font-sans">
-              A modern multi-domain recommendation platform for anime, games, and books powered by intelligent similarity vectors.
+              A modern multi-domain recommendation platform for anime powered by intelligent similarity vectors.
             </p>
           </div>
 
@@ -29,7 +29,7 @@ const Footer = () => {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/anime" className="hover:text-anime-sage transition-colors">
-                  Anime Catalog
+                  Anime List
                 </Link>
               </li>
               <li>
@@ -51,11 +51,6 @@ const Footer = () => {
               System
             </h3>
             <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/docs" className="hover:text-anime-sage transition-colors">
-                  API Documentation
-                </Link>
-              </li>
               <li>
                 <Link href="/algorithm" className="hover:text-anime-sage transition-colors">
                   Similarity Engine

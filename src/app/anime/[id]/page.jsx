@@ -14,7 +14,9 @@ import {
   TvIcon, 
   BuildingOffice2Icon, 
   CalendarDaysIcon,
-  FilmIcon
+  FilmIcon,
+  ClockIcon,
+  ShieldExclamationIcon
 } from '@heroicons/react/24/outline';
 
 export default function AnimeDetailPage() {
@@ -125,9 +127,6 @@ export default function AnimeDetailPage() {
                     {anime.status}
                   </span>
                 )}
-                <span className="text-xs text-anime-light/50 font-mono">
-                  MAL ID: {anime.mal_id}
-                </span>
               </div>
 
               <h1 className="text-3xl sm:text-4xl font-bold font-heading text-anime-light tracking-tight">
@@ -171,6 +170,24 @@ export default function AnimeDetailPage() {
                   {anime.aired_from ? new Date(anime.aired_from).getFullYear() : 'N/A'}
                 </p>
               </div>
+
+              <div className="space-y-1">
+                <span className="text-xs text-anime-light/50 flex items-center gap-1">
+                  <ClockIcon className="h-3.5 w-3.5 text-anime-coral" /> Aired To
+                </span>
+                <p className="text-sm font-bold font-heading text-anime-light">
+                  {anime.aired_to ? new Date(anime.aired_to).getFullYear() : 'N/A'}
+                </p>
+              </div>
+
+              <div className="space-y-1">
+                <span className="text-xs text-anime-light/50 flex items-center gap-1">
+                  <ShieldExclamationIcon className="h-3.5 w-3.5 text-anime-coral" /> Rating
+                </span>
+                <p className="text-sm font-bold font-heading text-anime-light">
+                  {anime.rating || 'N/A'}
+                </p>
+              </div>
             </div>
 
             {/* Genres & Tags */}
@@ -184,6 +201,20 @@ export default function AnimeDetailPage() {
                 ))}
               </div>
             </div>
+
+            {/* Themes */}
+            {anime.themes?.trim() && (
+              <div className="space-y-2">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-anime-light/60">Themes</h3>
+                <div className="flex flex-wrap gap-2">
+                  {anime.themes.split('|').map((theme, idx) => (
+                    <span key={idx} className="text-xs px-3 py-1 rounded-lg bg-anime-dark border border-anime-sage/20 text-anime-light/80 font-medium">
+                      {theme.trim()}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Synopsis */}
             <div className="space-y-2 pt-2">

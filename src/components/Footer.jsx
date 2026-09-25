@@ -32,6 +32,11 @@ const Footer = () => {
                   Anime List
                 </Link>
               </li>
+              <li>
+                <Link href="/manga" className="hover:text-anime-sage transition-colors">
+                  Manga List
+                </Link>
+              </li>
             </ul>
           </div>
 

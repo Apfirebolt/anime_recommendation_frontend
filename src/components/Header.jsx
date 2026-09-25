@@ -100,7 +100,7 @@ const Header = () => {
                 }`}
               >
                 <FilmIcon className="h-4 w-4" />
-                <span>Anime List</span>
+                <span>Anime</span>
               </Link>
             </li>
             <li>
@@ -113,7 +113,7 @@ const Header = () => {
                 }`}
               >
                 <BookOpenIcon className="h-4 w-4" />
-                <span>Manga List</span>
+                <span>Manga</span>
               </Link>
             </li>
           </ul>

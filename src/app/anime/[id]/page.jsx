@@ -31,7 +31,6 @@ export default function AnimeDetailPage() {
     const fetchAnimeDetail = async () => {
       setLoading(true);
       try {
-        // Hits your FastAPI endpoint: /anime/{id}
         const response = await httpClient.get(`/anime/${id}`);
         setAnime(response.data);
       } catch (err) {
@@ -174,7 +173,7 @@ export default function AnimeDetailPage() {
               </div>
             </div>
 
-            {/* Genres & Themes */}
+            {/* Genres & Tags */}
             <div className="space-y-2">
               <h3 className="text-xs font-semibold uppercase tracking-wider text-anime-light/60">Genres & Tags</h3>
               <div className="flex flex-wrap gap-2">
@@ -204,7 +203,7 @@ export default function AnimeDetailPage() {
             </div>
             <div>
               <h2 className="text-2xl font-bold font-heading text-anime-light">Similar Recommendations</h2>
-              <p className="text-xs text-anime-light/60">Top 10 mathematically matched titles precomputed via cosine similarity.</p>
+              <p className="text-xs text-anime-light/60">Top 10 similar anime to <span className="font-semibold text-anime-coral/80">{anime.title}</span></p>
             </div>
           </div>
 
@@ -220,27 +219,46 @@ export default function AnimeDetailPage() {
                   href={`/anime/${sim.mal_id}`}
                   className="p-4 rounded-2xl bg-anime-dark/40 border border-anime-sage/20 hover:border-anime-sage/50 transition-all flex items-start justify-between gap-4 group"
                 >
-                  <div className="flex items-start gap-3.5">
-                    <span className="w-7 h-7 rounded-lg bg-anime-sage/10 flex items-center justify-center text-xs font-mono font-bold text-anime-sage shrink-0 border border-anime-sage/20">
-                      #{index + 1}
-                    </span>
-                    <div className="space-y-1">
-                      <h4 className="font-heading font-bold text-anime-light group-hover:text-anime-sage transition-colors line-clamp-1">
+                  <div className="flex items-start gap-4 flex-grow min-w-0">
+                    {/* Thumbnail Image with Rank Badge Overlay */}
+                    <div className="relative w-20 h-28 shrink-0 rounded-xl overflow-hidden border border-anime-sage/20 bg-anime-dark">
+                      {sim.image_url ? (
+                        <img 
+                          src={sim.image_url} 
+                          alt={sim.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-[10px] text-anime-light/40 text-center">
+                          No Image
+                        </div>
+                      )}
+                      <span className="absolute top-1 left-1 w-6 h-6 rounded-md bg-anime-dark/80 backdrop-blur-md flex items-center justify-center text-[10px] font-mono font-bold text-anime-sage border border-anime-sage/20">
+                        #{index + 1}
+                      </span>
+                    </div>
+
+                    {/* Content Details */}
+                    <div className="space-y-1.5 flex-grow min-w-0">
+                      <h4 className="font-heading font-bold text-anime-light group-hover:text-anime-sage transition-colors line-clamp-1 text-base">
                         {sim.title}
                       </h4>
-                      <p className="text-xs text-anime-light/60 line-clamp-2 leading-relaxed">
+                      <p className="text-[10px] text-anime-light/60 line-clamp-2 leading-relaxed">
                         {sim.synopsis || 'No synopsis available.'}
                       </p>
-                      <div className="flex items-center gap-3 pt-1 text-[11px] text-anime-light/50">
-                        <span>Score: {sim.score || 'N/A'}</span>
+                      <div className="flex items-center gap-3 pt-1 text-[11px] text-anime-light/50 flex-wrap">
+                        <span className="flex items-center gap-1 font-semibold text-anime-coral">
+                          <StarIcon className="h-3 w-3" /> {sim.score || 'N/A'}
+                        </span>
                         <span>•</span>
-                        <span className="truncate max-w-[200px]">{sim.genres}</span>
+                        <span className="truncate max-w-[160px]">{sim.genres}</span>
                       </div>
                     </div>
                   </div>
 
+                  {/* Similarity Badge */}
                   {sim.similarity_score && (
-                    <span className="text-xs font-mono text-anime-coral px-2.5 py-1 rounded-full bg-anime-coral/10 shrink-0 border border-anime-coral/20">
+                    <span className="text-xs font-mono text-anime-coral px-2.5 py-1 rounded-full bg-anime-coral/10 shrink-0 border border-anime-coral/20 self-start">
                       {(sim.similarity_score * 100).toFixed(1)}%
                     </span>
                   )}

@@ -1,8 +1,12 @@
-// app/page.tsx
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Link from "next/link";
 import { SparklesIcon, MagnifyingGlassIcon, CpuChipIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
+
+export const metadata = {
+  title: "AnimeLounge | AI-Powered Anime Recommendations",
+  description: "Discover your next favorite anime instantly using machine learning, cosine similarity matrices, and a high-performance FastAPI backend.",
+};
 
 export default function Home() {
   return (
@@ -49,7 +53,7 @@ export default function Home() {
                 Engineered for Performance
               </h2>
               <p className="text-anime-light/60 max-w-xl mx-auto">
-                Designed with production-grade architecture principles to ensure seamless discovery and instant modal lookups.
+                Designed with production-grade architecture principles to ensure seamless discovery and instant lookups.
               </p>
             </div>
 
@@ -73,7 +77,7 @@ export default function Home() {
                   <CpuChipIcon className="h-6 w-6" />
                 </div>
                 <h3 className="text-xl font-bold font-heading text-anime-light">
-                  Precomputed $O(1)$ Reads
+                  Precomputed Reads
                 </h3>
                 <p className="text-sm text-anime-light/70 leading-relaxed">
                   Top similarity arrays are precomputed and stored in relational database tables, bypassing heavy runtime calculation overhead.
@@ -89,7 +93,7 @@ export default function Home() {
                   Interactive Exploration
                 </h3>
                 <p className="text-sm text-anime-light/70 leading-relaxed">
-                  A responsive Next.js frontend featuring real-time search filtering and instant modal popups displaying similar entities.
+                  A responsive Next.js frontend featuring real-time search filtering and instant title lookups displaying similar entities.
                 </p>
               </div>
             </div>

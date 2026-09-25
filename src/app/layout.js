@@ -4,8 +4,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata = {
-  title: "Code Editor - Next.js",
-  description: "A code editor built using Next.js",
+  title: "AnimeLounge.in",
+  description: "A modern multi-domain recommendation platform for anime powered by intelligent similarity vectors.",
 };
 
 const MainLayout = ({ children }) => {

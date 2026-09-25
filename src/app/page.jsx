@@ -1,3 +1,4 @@
+// app/page.jsx
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Link from "next/link";
@@ -10,7 +11,7 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-anime-dark text-anime-light flex flex-col font-sans selection:bg-anime-sage selection:text-anime-dark">
+    <div className="min-h-screen bg-anime-dark text-anime-light light:bg-white light:text-anime-dark flex flex-col font-sans selection:bg-anime-sage selection:text-anime-dark transition-colors duration-200">
       <Header />
 
       <main className="flex-grow">
@@ -29,7 +30,7 @@ export default function Home() {
               Discover Your Next <span className="text-anime-sage">Favorite Anime</span> Instantly.
             </h1>
 
-            <p className="text-lg sm:text-xl text-anime-light/70 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl opacity-80 max-w-2xl mx-auto leading-relaxed">
               Explore thousands of titles indexed by plot synopses, genres, and studios. Built with a lightning-fast FastAPI backend and precomputed similarity matrices.
             </p>
 
@@ -46,53 +47,53 @@ export default function Home() {
         </section>
 
         {/* Features / Engineering Highlights Section */}
-        <section className="py-20 px-6 border-t border-anime-sage/10 bg-anime-dark/40">
+        <section className="py-20 px-6 border-t border-anime-sage/10 bg-black/10 light:bg-gray-50">
           <div className="max-w-7xl mx-auto space-y-16">
             <div className="text-center space-y-4">
-              <h2 className="text-3xl font-bold font-heading text-anime-light">
+              <h2 className="text-3xl font-bold font-heading">
                 Engineered for Performance
               </h2>
-              <p className="text-anime-light/60 max-w-xl mx-auto">
+              <p className="opacity-70 max-w-xl mx-auto">
                 Designed with production-grade architecture principles to ensure seamless discovery and instant lookups.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Feature 1 */}
-              <div className="p-8 rounded-2xl bg-anime-dark border border-anime-sage/20 space-y-4 hover:border-anime-sage/50 transition-colors">
+              <div className="p-8 rounded-2xl bg-anime-dark/40 light:bg-white border border-anime-sage/20 space-y-4 hover:border-anime-sage/50 transition-colors shadow-sm">
                 <div className="w-12 h-12 rounded-xl bg-anime-sage/10 flex items-center justify-center text-anime-sage">
                   <SparklesIcon className="h-6 w-6" />
                 </div>
-                <h3 className="text-xl font-bold font-heading text-anime-light">
+                <h3 className="text-xl font-bold font-heading">
                   Scikit-Learn Backend
                 </h3>
-                <p className="text-sm text-anime-light/70 leading-relaxed">
+                <p className="text-sm opacity-80 leading-relaxed">
                   Leverages TF-IDF vectorization and cosine similarity across comprehensive metadata soups to find mathematically accurate matches.
                 </p>
               </div>
 
               {/* Feature 2 */}
-              <div className="p-8 rounded-2xl bg-anime-dark border border-anime-sage/20 space-y-4 hover:border-anime-sage/50 transition-colors">
+              <div className="p-8 rounded-2xl bg-anime-dark/40 light:bg-white border border-anime-sage/20 space-y-4 hover:border-anime-sage/50 transition-colors shadow-sm">
                 <div className="w-12 h-12 rounded-xl bg-anime-coral/10 flex items-center justify-center text-anime-coral">
                   <CpuChipIcon className="h-6 w-6" />
                 </div>
-                <h3 className="text-xl font-bold font-heading text-anime-light">
+                <h3 className="text-xl font-bold font-heading">
                   Precomputed Reads
                 </h3>
-                <p className="text-sm text-anime-light/70 leading-relaxed">
+                <p className="text-sm opacity-80 leading-relaxed">
                   Top similarity arrays are precomputed and stored in relational database tables, bypassing heavy runtime calculation overhead.
                 </p>
               </div>
 
               {/* Feature 3 */}
-              <div className="p-8 rounded-2xl bg-anime-dark border border-anime-sage/20 space-y-4 hover:border-anime-sage/50 transition-colors">
+              <div className="p-8 rounded-2xl bg-anime-dark/40 light:bg-white border border-anime-sage/20 space-y-4 hover:border-anime-sage/50 transition-colors shadow-sm">
                 <div className="w-12 h-12 rounded-xl bg-anime-sage/10 flex items-center justify-center text-anime-sage">
                   <MagnifyingGlassIcon className="h-6 w-6" />
                 </div>
-                <h3 className="text-xl font-bold font-heading text-anime-light">
+                <h3 className="text-xl font-bold font-heading">
                   Interactive Exploration
                 </h3>
-                <p className="text-sm text-anime-light/70 leading-relaxed">
+                <p className="text-sm opacity-80 leading-relaxed">
                   A responsive Next.js frontend featuring real-time search filtering and instant title lookups displaying similar entities.
                 </p>
               </div>

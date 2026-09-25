@@ -4,6 +4,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Loader from '@/components/Loader';
 import httpClient from '@/lib/api';
 import Link from 'next/link';
 import { 
@@ -11,7 +12,8 @@ import {
   ChevronLeftIcon, 
   ChevronRightIcon, 
   FilmIcon,
-  ArrowRightIcon
+  ArrowRightIcon,
+  EyeIcon
 } from '@heroicons/react/24/outline';
 
 export default function AnimeCatalogPage() {
@@ -95,7 +97,7 @@ export default function AnimeCatalogPage() {
         {/* Content Section: Grid or Loader */}
         {loading ? (
           <div className="flex items-center justify-center min-h-[40vh]">
-            <div className="w-12 h-12 border-4 border-anime-sage/20 border-t-anime-sage rounded-full animate-spin"></div>
+            <Loader />
           </div>
         ) : animeList.length === 0 ? (
           <div className="text-center py-24 space-y-4">
@@ -144,8 +146,8 @@ export default function AnimeCatalogPage() {
                     href={`/anime/${anime.mal_id}`}
                     className="px-3.5 py-2 text-xs font-semibold font-heading rounded-lg bg-anime-sage/10 text-anime-sage hover:bg-anime-sage hover:text-anime-dark transition-all flex items-center gap-1.5 group/btn"
                   >
-                    <span>View Details</span>
-                    <ArrowRightIcon className="h-3.5 w-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
+                    <EyeIcon className="h-3.5 w-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
+                    <span>View</span>
                   </Link>
                 </div>
               </div>

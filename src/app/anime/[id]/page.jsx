@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Loader from '@/components/Loader';
 import httpClient from '@/lib/api';
 import Link from 'next/link';
 import { 
@@ -51,7 +52,7 @@ export default function AnimeDetailPage() {
       <div className="min-h-screen bg-anime-dark text-anime-light flex flex-col font-sans">
         <Header />
         <div className="flex-grow flex items-center justify-center">
-          <div className="w-12 h-12 border-4 border-anime-sage/20 border-t-anime-sage rounded-full animate-spin"></div>
+          <Loader />
         </div>
         <Footer />
       </div>

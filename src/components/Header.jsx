@@ -10,22 +10,22 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-anime-dark/90 backdrop-blur-md border-b border-anime-sage/20">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         
         {/* Brand / Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-2xl font-bold font-heading text-anime-sage tracking-wider">
+          <span className="text-xl sm:text-2xl font-bold font-heading text-anime-sage tracking-wider">
             Anime<span className="text-anime-coral">Lounge</span> 
           </span>
         </Link>
 
         {/* Navigation Links */}
         <nav>
-          <ul className="flex items-center gap-4 font-sans">
+          <ul className="flex items-center gap-2 sm:gap-4 font-sans">
             <li>
               <Link 
                 href="/" 
-                className={`px-4 py-2 rounded-full font-semibold text-sm flex items-center space-x-2 transition-colors ${
+                className={`px-3 sm:px-4 py-2 rounded-full font-semibold text-xs sm:text-sm flex items-center space-x-1.5 sm:space-x-2 transition-colors whitespace-nowrap ${
                   pathname === '/' 
                     ? 'bg-anime-sage text-anime-dark' 
                     : 'text-anime-light/80 hover:text-anime-sage hover:bg-anime-sage/10'
@@ -38,7 +38,7 @@ const Header = () => {
             <li>
               <Link 
                 href="/anime" 
-                className={`px-4 py-2 rounded-full font-semibold text-sm flex items-center space-x-2 transition-colors ${
+                className={`px-3 sm:px-4 py-2 rounded-full font-semibold text-xs sm:text-sm flex items-center space-x-1.5 sm:space-x-2 transition-colors whitespace-nowrap ${
                   pathname.startsWith('/anime') 
                     ? 'bg-anime-sage text-anime-dark' 
                     : 'text-anime-light/80 hover:text-anime-sage hover:bg-anime-sage/10'

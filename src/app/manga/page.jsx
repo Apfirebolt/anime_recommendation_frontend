@@ -17,25 +17,37 @@ import {
 export default function MangaCatalogPage() {
   const [mangaList, setMangaList] = useState([]);
   const [loading, setLoading] = useState(true);
+  
+  // Filter & Pagination States
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedGenre, setSelectedGenre] = useState('');
+  const [sortBy, setSortBy] = useState('popularity');
+  const [publishedAfter, setPublishedAfter] = useState('');
+  const [publishedBefore, setPublishedBefore] = useState('');
+  
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  // Fetch manga list with search and pagination parameters
-  const fetchManga = useCallback(async (search = '', pageNum = 1) => {
+  // Common manga/anime genres for quick selection dropdown
+  const genresList = ['Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Romance', 'Sci-Fi', 'Slice of Life', 'Supernatural'];
+
+  // Fetch manga list with all filter parameters
+  const fetchManga = useCallback(async () => {
     setLoading(true);
     try {
       const response = await httpClient.get('/manga', {
         params: {
-          search: search.trim() || undefined, // Trim whitespace and omit if empty
-          page: pageNum,
-          size: 12, // matches backend size parameter
+          search: searchQuery.trim() || undefined,
+          genre: selectedGenre || undefined,
+          sort_by: sortBy || undefined,
+          published_after: publishedAfter || undefined,
+          published_before: publishedBefore || undefined,
+          page: page,
+          size: 12,
         },
       });
 
-      // Safely extract items array and total pages from FastAPI response structure
       const result = response.data;
-      
       setMangaList(Array.isArray(result.items) ? result.items : []);
       
       if (typeof result.pages === 'number') {
@@ -47,21 +59,21 @@ export default function MangaCatalogPage() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [searchQuery, selectedGenre, sortBy, publishedAfter, publishedBefore, page]);
 
-  // Initial load and search triggers with debounce
+  // Debounced trigger when any filter or page changes
   useEffect(() => {
     const timer = setTimeout(() => {
-      fetchManga(searchQuery, page);
-    }, 300); // 300ms debounce for typing search
+      fetchManga();
+    }, 300);
 
     return () => clearTimeout(timer);
-  }, [searchQuery, page, fetchManga]);
+  }, [fetchManga]);
 
-  // Handler to reset pagination back to page 1 whenever search input changes
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-    setPage(1); 
+  // Reset page to 1 whenever any filter criteria changes
+  const handleFilterChange = (setter) => (e) => {
+    setter(e.target.value);
+    setPage(1);
   };
 
   return (
@@ -70,25 +82,88 @@ export default function MangaCatalogPage() {
 
       <main className="flex-grow max-w-7xl mx-auto px-6 py-12 w-full space-y-10">
         
-        {/* Page Title & Search Bar Section */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-gray-200 dark:border-anime-sage/20 pb-8">
-          <div>
-            <h1 className="text-3xl font-bold font-heading">Manga Catalog</h1>
-            <p className="text-sm text-gray-600 dark:text-anime-light/60 mt-1">
-              Explore manga, manhwa, and novels indexed by our similarity engine.
-            </p>
+        {/* Page Title & Controls Section */}
+        <div className="flex flex-col gap-6 border-b border-gray-200 dark:border-anime-sage/20 pb-8">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <h1 className="text-3xl font-bold font-heading">Manga Catalog</h1>
+              <p className="text-sm text-gray-600 dark:text-anime-light/60 mt-1">
+                Explore manga, manhwa, and novels indexed by our similarity engine with advanced filters.
+              </p>
+            </div>
+
+            {/* Search Bar */}
+            <div className="relative w-full md:w-80">
+              <MagnifyingGlassIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 dark:text-anime-light/40" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={handleFilterChange(setSearchQuery)}
+                placeholder="Search by title, author..."
+                className="w-full pl-11 pr-4 py-2.5 text-sm bg-gray-50 dark:bg-anime-dark/50 border border-gray-300 dark:border-anime-sage/30 rounded-xl focus:outline-none focus:border-anime-sage text-gray-900 dark:text-anime-light placeholder-gray-400 dark:placeholder-anime-light/40 shadow-sm"
+              />
+            </div>
           </div>
 
-          {/* Search Bar */}
-          <div className="relative w-full md:w-80">
-            <MagnifyingGlassIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 dark:text-anime-light/40" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={handleSearchChange}
-              placeholder="Search by title, genre, author..."
-              className="w-full pl-11 pr-4 py-2.5 text-sm bg-gray-50 dark:bg-anime-dark/50 border border-gray-300 dark:border-anime-sage/30 rounded-xl focus:outline-none focus:border-anime-sage text-gray-900 dark:text-anime-light placeholder-gray-400 dark:placeholder-anime-light/40 transition-colors shadow-sm"
-            />
+          {/* Advanced Filter Bar (Genre, Sort, Date Ranges) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 rounded-2xl bg-gray-50 dark:bg-anime-dark/40 border border-gray-200 dark:border-anime-sage/20 shadow-sm">
+            
+            {/* Genre Dropdown */}
+            <div className="space-y-1">
+              <label className="text-xs font-semibold text-gray-500 dark:text-anime-light/60">Genre</label>
+              <select
+                value={selectedGenre}
+                onChange={handleFilterChange(setSelectedGenre)}
+                className="w-full px-3 py-2 text-sm bg-white dark:bg-anime-dark border border-gray-300 dark:border-anime-sage/30 rounded-xl focus:outline-none focus:border-anime-sage text-gray-900 dark:text-anime-light"
+              >
+                <option value="">All Genres</option>
+                {genresList.map((genre) => (
+                  <option key={genre} value={genre}>{genre}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Sort Dropdown */}
+            <div className="space-y-1">
+              <label className="text-xs font-semibold text-gray-500 dark:text-anime-light/60">Sort By</label>
+              <select
+                value={sortBy}
+                onChange={handleFilterChange(setSortBy)}
+                className="w-full px-3 py-2 text-sm bg-white dark:bg-anime-dark border border-gray-300 dark:border-anime-sage/30 rounded-xl focus:outline-none focus:border-anime-sage text-gray-900 dark:text-anime-light"
+              >
+                <option value="popularity">Popularity (Default)</option>
+                <option value="highest_voted">Highest Voted / Score</option>
+                <option value="most_chapters">Most Chapters</option>
+                <option value="most_volumes">Most Volumes</option>
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+                <option value="favorites">Most Favorites</option>
+                <option value="rank">MAL Rank</option>
+              </select>
+            </div>
+
+            {/* Published After Date */}
+            <div className="space-y-1">
+              <label className="text-xs font-semibold text-gray-500 dark:text-anime-light/60">Published After</label>
+              <input
+                type="date"
+                value={publishedAfter}
+                onChange={handleFilterChange(setPublishedAfter)}
+                className="w-full px-3 py-1.5 text-sm bg-white dark:bg-anime-dark border border-gray-300 dark:border-anime-sage/30 rounded-xl focus:outline-none focus:border-anime-sage text-gray-900 dark:text-anime-light"
+              />
+            </div>
+
+            {/* Published Before Date */}
+            <div className="space-y-1">
+              <label className="text-xs font-semibold text-gray-500 dark:text-anime-light/60">Published Before</label>
+              <input
+                type="date"
+                value={publishedBefore}
+                onChange={handleFilterChange(setPublishedBefore)}
+                className="w-full px-3 py-1.5 text-sm bg-white dark:bg-anime-dark border border-gray-300 dark:border-anime-sage/30 rounded-xl focus:outline-none focus:border-anime-sage text-gray-900 dark:text-anime-light"
+              />
+            </div>
+
           </div>
         </div>
 
@@ -100,7 +175,7 @@ export default function MangaCatalogPage() {
         ) : mangaList.length === 0 ? (
           <div className="text-center py-24 space-y-4">
             <BookOpenIcon className="mx-auto h-12 w-12 text-gray-400 dark:text-anime-light/30" />
-            <p className="text-gray-600 dark:text-anime-light/60 text-lg">No manga found matching your search query.</p>
+            <p className="text-gray-600 dark:text-anime-light/60 text-lg">No manga found matching your filter criteria.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -137,7 +212,7 @@ export default function MangaCatalogPage() {
                 {/* Action Trigger -> Direct Link to Detail Page */}
                 <div className="pt-6 mt-4 border-t border-gray-100 dark:border-anime-sage/10 flex items-center justify-between">
                   <span className="text-xs text-gray-500 dark:text-anime-light/50 font-mono">
-                    Score: {manga.score || 'N/A'}
+                    Score: {manga.score || 'N/A'} | Ch: {manga.chapters || '?'}
                   </span>
                   
                   <Link

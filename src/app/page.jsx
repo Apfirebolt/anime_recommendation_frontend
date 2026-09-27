@@ -34,12 +34,29 @@ export default function Home() {
               Explore thousands of titles indexed by plot synopses, genres, and studios. Built with a lightning-fast FastAPI backend and precomputed similarity matrices.
             </p>
 
+            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Link
                 href="/anime"
                 className="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold font-heading bg-anime-sage text-anime-dark hover:bg-anime-sage/90 transition-all shadow-lg shadow-anime-sage/10 flex items-center justify-center gap-2 group"
               >
                 <span>Browse Anime</span>
+                <ArrowRightIcon className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+
+              <Link
+                href="/vibe-search"
+                className="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold font-heading bg-gray-100 dark:bg-anime-dark/50 border border-gray-300 dark:border-anime-sage/30 text-gray-900 dark:text-anime-light hover:bg-gray-200 dark:hover:bg-anime-sage/10 transition-all flex items-center justify-center gap-2 group"
+              >
+                <SparklesIcon className="h-4 w-4 text-anime-coral" />
+                <span>Try Vibe Search</span>
+              </Link>
+
+              <Link
+                href="/manga"
+                className="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold font-heading bg-anime-sage text-anime-dark hover:bg-anime-sage/90 transition-all shadow-lg shadow-anime-sage/10 flex items-center justify-center gap-2 group"
+              >
+                <span>Browse Manga</span>
                 <ArrowRightIcon className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>

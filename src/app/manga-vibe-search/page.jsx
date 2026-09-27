@@ -12,11 +12,13 @@ import {
   MagnifyingGlassIcon, 
   FilmIcon,
   EyeIcon,
-  StarIcon
+  StarIcon,
+  AdjustmentsHorizontalIcon
 } from '@heroicons/react/24/outline';
 
 export default function MangaVibeSearchPage() {
   const [query, setQuery] = useState('');
+  const [limit, setLimit] = useState(10); // Default items limit
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
@@ -31,7 +33,7 @@ export default function MangaVibeSearchPage() {
       const response = await httpClient.get('manga/vibe-search', {
         params: {
           q: query.trim(),
-          limit: 12,
+          limit: Number(limit),
         },
       });
       
@@ -79,6 +81,25 @@ export default function MangaVibeSearchPage() {
                 className="w-full pl-12 pr-4 py-3.5 text-sm bg-gray-50 dark:bg-anime-dark/50 border border-gray-300 dark:border-anime-sage/30 rounded-2xl focus:outline-none focus:border-anime-sage text-gray-900 dark:text-anime-light placeholder-gray-400 dark:placeholder-anime-light/40 shadow-sm transition-all"
               />
             </div>
+
+            {/* Limit Selector Dropdown */}
+            <div className="relative flex items-center shrink-0">
+              <div className="absolute left-3.5 pointer-events-none text-gray-400 dark:text-anime-light/40">
+                <AdjustmentsHorizontalIcon className="h-4 w-4" />
+              </div>
+              <select
+                value={limit}
+                onChange={(e) => setLimit(e.target.value)}
+                className="pl-10 pr-6 py-3.5 text-sm bg-gray-50 dark:bg-anime-dark/50 border border-gray-300 dark:border-anime-sage/30 rounded-2xl focus:outline-none focus:border-anime-sage text-gray-900 dark:text-anime-light shadow-sm transition-all cursor-pointer"
+                title="Number of results"
+              >
+                <option value={10}>10 items</option>
+                <option value={20}>20 items</option>
+                <option value={30}>30 items</option>
+                <option value={50}>50 items</option>
+              </select>
+            </div>
+
             <button
               type="submit"
               disabled={loading || !query.trim()}

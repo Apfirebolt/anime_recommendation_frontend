@@ -1,4 +1,3 @@
-// app/vibe-search/page.jsx
 'use client';
 
 import React, { useState } from 'react';
@@ -55,11 +54,11 @@ export default function VibeSearchPage() {
         <div className="text-center max-w-3xl mx-auto space-y-6 pt-4">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-anime-sage/10 border border-anime-sage/20 text-anime-sage text-sm font-medium">
             <SparklesIcon className="h-4 w-4" />
-            <span>AI Semantic Similarity Search</span>
+            <span>AI Anime Search</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-bold font-heading tracking-tight">
-            Search by <span className="text-anime-sage">Vibe</span> or Plot
+            Search Anime by <span className="text-anime-sage">Vibe</span> or Plot
           </h1>
 
           <p className="text-sm sm:text-base text-gray-600 dark:text-anime-light/70 leading-relaxed">

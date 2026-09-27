@@ -12,7 +12,9 @@ import {
   ChevronLeftIcon, 
   ChevronRightIcon, 
   FilmIcon,
+  ArrowRightIcon,
   EyeIcon,
+  SparklesIcon,
   AdjustmentsHorizontalIcon
 } from '@heroicons/react/24/outline';
 
@@ -83,6 +85,34 @@ export default function AnimeCatalogPage() {
       <Header />
 
       <main className="flex-grow max-w-7xl mx-auto px-6 py-12 w-full space-y-10">
+
+         {/* Vibe Search Banner Callout */}
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-anime-sage/15 via-anime-sage/5 to-transparent border border-anime-sage/30 p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-lg shadow-anime-sage/5">
+          <div className="absolute -right-10 -bottom-10 w-48 h-48 bg-anime-sage/10 rounded-full blur-2xl pointer-events-none" />
+          
+          <div className="space-y-2 relative z-10 text-center md:text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-anime-sage/20 text-anime-sage text-xs font-semibold">
+              <SparklesIcon className="h-3.5 w-3.5" />
+              <span>AI Anime Discovery</span>
+            </div>
+            <h2 className="text-xl sm:text-2xl font-bold font-heading">
+              Looking for a specific vibe or storyline for an anime?
+            </h2>
+            <p className="text-xs sm:text-sm text-gray-600 dark:text-anime-light/70 max-w-xl">
+              Don't know what to watch next? Describe your ideal plot twist, character dynamic, or atmosphere in natural language and let our AI model find your match.
+            </p>
+          </div>
+
+          <div className="shrink-0 relative z-10">
+            <Link
+              href="/vibe-search"
+              className="px-6 py-3 rounded-xl bg-anime-sage text-anime-dark font-semibold font-heading hover:bg-anime-sage/90 transition-all shadow-md flex items-center gap-2 group text-sm"
+            >
+              <span>Try Vibe Search</span>
+              <ArrowRightIcon className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
         
         {/* Page Title & Controls Section */}
         <div className="flex flex-col gap-6 border-b border-gray-200 dark:border-anime-sage/20 pb-8">

@@ -12,8 +12,7 @@ describe('Footer Component', () => {
   it('renders the brand title and description', () => {
     render(<Footer />);
     
-    expect(screen.getByText(/Anime/i)).toBeInTheDocument();
-    expect(screen.getByText(/Lounge/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Anime\s*Lounge/i })).toHaveAttribute('href', '/');
     expect(screen.getByText(/A modern multi-domain recommendation platform/i)).toBeInTheDocument();
   });
 

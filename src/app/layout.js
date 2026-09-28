@@ -4,13 +4,16 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata = {
-  title: "AnimeLounge.in",
+  title: {
+    template: '%s | AnimeLounge',
+    default: 'AnimeLounge | AI-Powered Anime & Manga Recommendations',
+  },
   description: "A modern multi-domain recommendation platform for anime powered by intelligent similarity vectors.",
 };
 
 const MainLayout = ({ children }) => {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="bg-sand">
         <ToastContainer />
         {children}

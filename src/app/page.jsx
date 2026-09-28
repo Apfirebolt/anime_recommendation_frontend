@@ -45,14 +45,6 @@ export default function Home() {
               </Link>
 
               <Link
-                href="/vibe-search"
-                className="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold font-heading bg-gray-100 dark:bg-anime-dark/50 border border-gray-300 dark:border-anime-sage/30 text-gray-900 dark:text-anime-light hover:bg-gray-200 dark:hover:bg-anime-sage/10 transition-all flex items-center justify-center gap-2 group"
-              >
-                <SparklesIcon className="h-4 w-4 text-anime-coral" />
-                <span>Try Vibe Search</span>
-              </Link>
-
-              <Link
                 href="/manga"
                 className="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold font-heading bg-anime-sage text-anime-dark hover:bg-anime-sage/90 transition-all shadow-lg shadow-anime-sage/10 flex items-center justify-center gap-2 group"
               >

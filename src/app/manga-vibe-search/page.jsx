@@ -1,33 +1,21 @@
-// app/manga/vibe-search/page.jsx
+// app/manga-vibe-search/page.jsx
+import { Suspense } from 'react';
 import VibeSearchClient from './VibeSearchClient';
+import Loader from '@/components/Loader';
 
-export async function generateMetadata({ searchParams }) {
-  const resolvedParams = await searchParams;
-  const query = resolvedParams?.q;
+export const metadata = {
+  title: 'AI Manga Vibe Search | AnimeLounge',
+  description: 'Search manga using natural language semantics and sentence embeddings.',
+};
 
-  if (query) {
-    return {
-      title: `Manga Vibe Search: "${query}" | AnimeLounge`,
-      description: `Explore AI-recommended manga matching the vibe: "${query}" using semantic similarity vectors.`,
-      openGraph: {
-        title: `Manga Vibe Search: "${query}" | AnimeLounge`,
-        description: `Explore AI-recommended manga matching the vibe: "${query}".`,
-        type: 'website',
-      },
-    };
-  }
-
-  return {
-    title: 'AI Manga Vibe Search - Describe & Discover Manga | AnimeLounge',
-    description: 'Use our AI semantic vector search engine to find manga matching any plot, mood, or character trope you describe in plain English.',
-    openGraph: {
-      title: 'AI Manga Vibe Search | AnimeLounge',
-      description: 'Discover manga matching your custom descriptions using sentence embeddings and cosine similarity.',
-      type: 'website',
-    },
-  };
-}
-
-export default function VibeSearchPage() {
-  return <VibeSearchClient />;
+export default function MangaVibeSearchPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-white dark:bg-anime-dark flex items-center justify-center">
+        <Loader />
+      </div>
+    }>
+      <VibeSearchClient />
+    </Suspense>
+  );
 }

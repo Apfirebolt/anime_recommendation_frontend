@@ -1,5 +1,6 @@
-// app/vibe-search/page.jsx
+import { Suspense } from 'react';
 import VibeSearchClient from './VibeSearchClient';
+import Loader from '@/components/Loader';
 
 export async function generateMetadata({ searchParams }) {
   const resolvedParams = await searchParams;
@@ -11,7 +12,7 @@ export async function generateMetadata({ searchParams }) {
       description: `Explore AI-recommended anime matching the vibe: "${query}" using semantic similarity vectors.`,
       openGraph: {
         title: `Anime Vibe Search: "${query}" | AnimeLounge`,
-        description: `Explore AI-recommended anime matching the vibe: "${query}".`,
+        description: `Explore AI-recommended anime matching the vibe: "${query}"`,
         type: 'website',
       },
     };
@@ -29,5 +30,13 @@ export async function generateMetadata({ searchParams }) {
 }
 
 export default function VibeSearchPage() {
-  return <VibeSearchClient />;
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-white dark:bg-anime-dark flex items-center justify-center">
+        <Loader />
+      </div>
+    }>
+      <VibeSearchClient />
+    </Suspense>
+  );
 }

@@ -42,6 +42,11 @@ const Footer = () => {
                   Compare
                 </Link>
               </li>
+              <li>
+                <Link href="/top-by-year" className="hover:text-anime-sage transition-colors">
+                  Top By Year
+                </Link>
+              </li>
             </ul>
           </div>
 

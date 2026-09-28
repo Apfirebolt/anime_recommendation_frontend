@@ -8,6 +8,7 @@ import {
   HomeIcon, 
   FilmIcon, 
   BookOpenIcon, 
+  ArrowsRightLeftIcon,
   Bars3Icon, 
   XMarkIcon,
   SunIcon,
@@ -94,7 +95,7 @@ const Header = () => {
               <Link 
                 href="/anime" 
                 className={`px-4 py-2 rounded-full font-semibold text-sm flex items-center space-x-2 transition-colors whitespace-nowrap ${
-                  pathname.startsWith('/anime') 
+                  pathname.startsWith('/anime') && pathname !== '/compare'
                     ? 'bg-anime-sage text-anime-dark' 
                     : 'text-gray-700 dark:text-anime-light/85 hover:text-anime-sage dark:hover:text-anime-sage hover:bg-anime-sage/10'
                 }`}
@@ -114,6 +115,19 @@ const Header = () => {
               >
                 <BookOpenIcon className="h-4 w-4" />
                 <span>Manga</span>
+              </Link>
+            </li>
+            <li>
+              <Link 
+                href="/compare" 
+                className={`px-4 py-2 rounded-full font-semibold text-sm flex items-center space-x-2 transition-colors whitespace-nowrap ${
+                  pathname === '/compare' 
+                    ? 'bg-anime-sage text-anime-dark' 
+                    : 'text-gray-700 dark:text-anime-light/85 hover:text-anime-sage dark:hover:text-anime-sage hover:bg-anime-sage/10'
+                }`}
+              >
+                <ArrowsRightLeftIcon className="h-4 w-4" />
+                <span>Compare</span>
               </Link>
             </li>
           </ul>
@@ -151,7 +165,7 @@ const Header = () => {
           <Link
             href="/anime"
             className={`flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm transition-colors ${
-              pathname.startsWith('/anime') 
+              pathname.startsWith('/anime') && pathname !== '/compare'
                 ? 'bg-anime-sage text-anime-dark' 
                 : 'text-gray-700 dark:text-anime-light/85 hover:bg-anime-sage/10 hover:text-anime-sage'
             }`}
@@ -170,6 +184,18 @@ const Header = () => {
           >
             <BookOpenIcon className="h-5 w-5" />
             <span>Manga</span>
+          </Link>
+
+          <Link
+            href="/compare"
+            className={`flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm transition-colors ${
+              pathname === '/compare' 
+                ? 'bg-anime-sage text-anime-dark' 
+                : 'text-gray-700 dark:text-anime-light/85 hover:bg-anime-sage/10 hover:text-anime-sage'
+            }`}
+          >
+            <ArrowsRightLeftIcon className="h-5 w-5" />
+            <span>Compare</span>
           </Link>
         </div>
       )}

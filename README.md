@@ -79,15 +79,102 @@ To use the application, follow these steps:
 
 ## Screenshots
 
-### Anime Catalog & Multi-Criteria Filters
-![Screenshot](/screenshots/catalog.png)
+### Manga Catalog & Multi-Criteria Filters
+![Screenshot](/screenshots/manga.png)
 
 ### Head-to-Head Comparison Analytics with Chart.js
 ![Screenshot](/screenshots/compare.png)
 
+### Anime vibe search
+![Screenshot](/screenshots/anime_vibe_search.png)
+
+### Manga Catalog & Multi-Criteria Filters
+![Screenshot](/screenshots/manga.png)
+
+### Best of each year
+![Screenshot](/screenshots/year_ranking.png)
+
+### Recommendations for an anime/manga
+![Screenshot](/screenshots/recommendations.png)
+
 ## Project Structure
 
-This project uses both client-side and server-side rendering of pages. So, these components are clubbed together inside the app folder. Commonly used components have their separate folder called "components". This is how the overall structure looks like
+The Next.js App Router pages live in `src/app`. Route pages compose server-rendered wrappers and client components where interactive behavior is needed. Shared UI, API access, and utilities are kept in separate directories.
+
+```text
+.
+├── public/
+│   ├── github.png
+│   ├── next.svg
+│   └── vercel.svg
+├── screenshots/
+│   ├── anime_vibe_search.png
+│   ├── compare.png
+│   ├── manga.png
+│   ├── manga_detail.png
+│   ├── recommendations.png
+│   └── year_ranking.png
+├── src/
+│   ├── app/
+│   │   ├── __tests__/
+│   │   │   ├── catalogs.test.jsx
+│   │   │   ├── CompareClient.test.jsx
+│   │   │   ├── login.test.jsx
+│   │   │   ├── pages.test.jsx
+│   │   │   ├── register.test.jsx
+│   │   │   └── VibeSearchClient.test.jsx
+│   │   ├── anime/
+│   │   │   ├── [id]/
+│   │   │   │   ├── AnimeDetailClient.jsx
+│   │   │   │   └── page.jsx
+│   │   │   ├── AnimeCatalogClient.jsx
+│   │   │   └── page.jsx
+│   │   ├── compare/
+│   │   │   ├── CompareClient.jsx
+│   │   │   └── page.jsx
+│   │   ├── login/page.jsx
+│   │   ├── manga/
+│   │   │   ├── [id]/
+│   │   │   │   ├── MangaDetailClient.jsx
+│   │   │   │   └── page.jsx
+│   │   │   ├── MangaCatalogClient.jsx
+│   │   │   └── page.jsx
+│   │   ├── manga-vibe-search/
+│   │   │   ├── VibeSearchClient.jsx
+│   │   │   └── page.jsx
+│   │   ├── register/page.jsx
+│   │   ├── top-by-year/
+│   │   │   ├── TopByYearClient.jsx
+│   │   │   └── page.jsx
+│   │   ├── vibe-search/
+│   │   │   ├── VibeSearchClient.jsx
+│   │   │   └── page.jsx
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.js
+│   │   ├── main.css
+│   │   ├── not-found.jsx
+│   │   └── page.jsx
+│   ├── components/
+│   │   ├── Footer.jsx
+│   │   ├── Header.jsx
+│   │   └── Loader.jsx
+│   ├── lib/api.js
+│   ├── utils/constants.js
+│   ├── middleware.js
+│   └── __tests__/
+│       ├── Footer.test.jsx
+│       ├── Header.test.jsx
+│       └── Loader.test.jsx
+├── .env.example
+├── jest.config.js
+├── jest.setup.js
+├── jsconfig.json
+├── next.config.mjs
+├── package.json
+├── postcss.config.mjs
+└── tsconfig.json
+```
 
 
 
